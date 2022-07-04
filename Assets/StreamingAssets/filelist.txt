@@ -1,0 +1,3 @@
+Assets/BuildResources/UI/Prefabs/UITest.prefab|ui/prefabs/uitest.prefab.ab|Assets/BuildResources/UI/Res/miku2.jpg|Assets/BuildResources/UI/Res/miku.jpg
+Assets/BuildResources/UI/Res/miku.jpg|ui/res/miku.jpg.ab
+Assets/BuildResources/UI/Res/miku2.jpg|ui/res/miku2.jpg.ab

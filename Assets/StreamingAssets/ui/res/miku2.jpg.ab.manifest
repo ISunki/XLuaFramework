@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1493783935
+CRC: 2023069040
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a9a3f5a5c380efa8d2645af92510a703
+    Hash: 0780dc9fd77b9cd04a56b43459ed1cbe
   TypeTreeHash:
     serializedVersion: 2
     Hash: 46bbd9da48cff8d17f0c89eef78da528
@@ -15,5 +15,5 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/BuildResources/UI/Res/miku.jpg
+- Assets/BuildResources/UI/Res/miku2.jpg
 Dependencies: []

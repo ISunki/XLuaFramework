@@ -11,7 +11,13 @@ public class PathUtil
     public static readonly string BuildResourcesPath = AssetsPath + "/BuildResources/";
 
     //bundle输出目录
-    public static readonly string BuildOutPath = Application.streamingAssetsPath;
+    public static readonly string BundleOutPath = Application.streamingAssetsPath;
+
+    //bundle资源路径
+    public static string BundleResourcePath
+    {
+        get { return Application.streamingAssetsPath; }
+    }
 
     /// <summary>
     /// 获取Unity的相对路径
