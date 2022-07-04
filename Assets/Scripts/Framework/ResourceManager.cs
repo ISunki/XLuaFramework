@@ -65,15 +65,58 @@ public class ResourceManager : MonoBehaviour
         action?.Invoke(bundleRequest?.asset);
     }
 
-    public void LoadAsset(string assetName, Action<UObject> action)
+    /// <summary>
+    /// 编辑器环境加载资源
+    /// </summary>
+    /// <param name="assetName"></param>
+    /// <param name="action"></param>
+    void EditorLoadAsset(string assetName, Action<UObject> action = null)
     {
-        StartCoroutine(LoadBundleAsync(assetName, action));
+        UObject obj = UnityEditor.AssetDatabase.LoadAssetAtPath(assetName, typeof(UObject));
+        if (obj == null)
+            Debug.LogError("asset not exists: " + assetName);
+        action?.Invoke(obj);
     }
+
+    private void LoadAsset(string assetName, Action<UObject> action)
+    {
+        if(AppConst.GameMode == GameMode.EditorMode)
+            EditorLoadAsset(assetName, action);
+        else
+            StartCoroutine(LoadBundleAsync(assetName, action));
+    }
+
+    public void LoadUI(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(PathUtil.GetUIPath(assetNmae), action);
+    }
+
+    public void LoadMusic(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(PathUtil.GetMusicPath(assetNmae), action);
+    }
+
+    public void LoadSound(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(PathUtil.GetSoundPath(assetNmae), action);
+    }
+
+    public void LoadEffect(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(PathUtil.GetEffectPath(assetNmae), action);
+    }
+
+    public void LoadScene(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(PathUtil.GetScenePath(assetNmae), action);
+    }
+
+    //卸载先不做
 
     private void Start()
     {
         ParseVersionFile();
-        LoadAsset("Assets/BuildResources/UI/Prefabs/UITest.prefab", OnComplete);
+        LoadUI("UITest", OnComplete);
     }
 
     private void OnComplete(UObject obj)
