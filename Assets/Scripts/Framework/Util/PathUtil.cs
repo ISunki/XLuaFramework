@@ -13,10 +13,24 @@ public class PathUtil
     //bundle输出目录
     public static readonly string BundleOutPath = Application.streamingAssetsPath;
 
+    //只读目录
+    public static readonly string ReadOnlyPath = Application.streamingAssetsPath;
+
+    //可读写目录
+    public static readonly string ReadWritePath = Application.persistentDataPath;
+
+    //Lua目录
+    public static readonly string LuaPath = "Assets/BuildResources/LuaScripts";
+
     //bundle资源路径
     public static string BundleResourcePath
     {
-        get { return Application.streamingAssetsPath; }
+        get
+        {
+            if (AppConst.GameMode == GameMode.UpdateMode)
+                return ReadWritePath;
+            return ReadOnlyPath; 
+        }
     }
 
     /// <summary>
@@ -45,7 +59,7 @@ public class PathUtil
 
     public static string GetLuaPath(string name)
     {
-        return string.Format("Assets/BuildResources/LuaScripts/{0}.byte", name);
+        return string.Format("Assets/BuildResources/LuaScripts/{0}.bytes", name);
     }
     public static string GetUIPath(string name)
     {

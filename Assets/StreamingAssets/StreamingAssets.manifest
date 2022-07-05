@@ -1,15 +1,18 @@
 ManifestFileVersion: 0
-CRC: 1640154485
+CRC: 3825188483
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
+      Name: luascripts/main.bytes.ab
+      Dependencies: {}
+    Info_1:
       Name: ui/prefabs/uitest.prefab.ab
       Dependencies:
         Dependency_0: ui/res/miku.jpg.ab
         Dependency_1: ui/res/miku2.jpg.ab
-    Info_1:
+    Info_2:
       Name: ui/res/miku.jpg.ab
       Dependencies: {}
-    Info_2:
+    Info_3:
       Name: ui/res/miku2.jpg.ab
       Dependencies: {}

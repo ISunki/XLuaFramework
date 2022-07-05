@@ -20,7 +20,7 @@ public class ResourceManager : MonoBehaviour
     /// <summary>
     /// 解析版本文件
     /// </summary>
-    private void ParseVersionFile()
+    public void ParseVersionFile()
     {
         //版本文件的路径
         string url = Path.Combine(PathUtil.BundleResourcePath, AppConst.FileListName);
@@ -40,6 +40,9 @@ public class ResourceManager : MonoBehaviour
                 bundleInfo.Dependences.Add(info[j]);
             }
             m_BundleInfos.Add(bundleInfo.AssetName, bundleInfo);
+
+            if (info[0].IndexOf("LuaScripts") > 0)
+                Manager.Lua.LuaNames.Add(info[0]);
         }
     }
 
@@ -61,10 +64,11 @@ public class ResourceManager : MonoBehaviour
 
         AssetBundleRequest bundleRequest = request.assetBundle.LoadAssetAsync(assetName);
         yield return bundleRequest;
-
+        Debug.Log("LoadBundleAsync");
         action?.Invoke(bundleRequest?.asset);
     }
 
+#if UNITY_EDITOR
     /// <summary>
     /// 编辑器环境加载资源
     /// </summary>
@@ -72,17 +76,22 @@ public class ResourceManager : MonoBehaviour
     /// <param name="action"></param>
     void EditorLoadAsset(string assetName, Action<UObject> action = null)
     {
+        Debug.Log("EditorLoadAsset");
         UObject obj = UnityEditor.AssetDatabase.LoadAssetAtPath(assetName, typeof(UObject));
         if (obj == null)
             Debug.LogError("asset not exists: " + assetName);
         action?.Invoke(obj);
     }
+#endif
+
 
     private void LoadAsset(string assetName, Action<UObject> action)
     {
-        if(AppConst.GameMode == GameMode.EditorMode)
+#if UNITY_EDITOR
+        if (AppConst.GameMode == GameMode.EditorMode)
             EditorLoadAsset(assetName, action);
         else
+#endif 
             StartCoroutine(LoadBundleAsync(assetName, action));
     }
 
@@ -111,19 +120,12 @@ public class ResourceManager : MonoBehaviour
         LoadAsset(PathUtil.GetScenePath(assetNmae), action);
     }
 
+    public void LoadLua(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(assetNmae, action);
+    }
+
     //卸载先不做
 
-    private void Start()
-    {
-        ParseVersionFile();
-        LoadUI("UITest", OnComplete);
-    }
 
-    private void OnComplete(UObject obj)
-    {
-        GameObject go = Instantiate(obj) as GameObject;
-        go.transform.SetParent(this.transform);
-        go.SetActive(true);
-        go.transform.localPosition = Vector3.zero;
-    }
 }
