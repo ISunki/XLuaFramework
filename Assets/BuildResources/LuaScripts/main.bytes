@@ -1,5 +1,32 @@
+Manager = CS.Manager;
+PathUtil = CS.PathUtil;
+Vector3 = CS.UnityEngine.Vector3;
+Input = CS.UnityEngine.Input;
+KeyCode = CS.UnityEngine.KeyCode;
+Time = CS.UnityEngine.Time;
+
+
+local ui_group = 
+{	
+	"Main",
+	"UI",
+	"Box",
+}
+
+local entity_group = 
+{
+	"Player",
+	"Monster",
+	"Effect",
+}
+
+Manager.UI:SetUIGroup(ui_group);
+Manager.Entity:SetEntityGroup(entity_group);
+
 function Main()
 	print("hello main!");
+	Manager.UI:OpenUI("UITest", "UI", "UI.UITest");
+	-- Manager.UI:OpenUI("UITest2", "Main", "UI.UITest");
 end
 
 Main();

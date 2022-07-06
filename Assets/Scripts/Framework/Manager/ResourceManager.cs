@@ -125,6 +125,11 @@ public class ResourceManager : MonoBehaviour
         LoadAsset(assetNmae, action);
     }
 
+    public void LoadPrefab(string assetNmae, Action<UObject> action = null)
+    {
+        LoadAsset(assetNmae, action);
+    }
+
     //卸载先不做
 
 

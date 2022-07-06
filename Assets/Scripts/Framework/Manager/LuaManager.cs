@@ -40,7 +40,7 @@ public class LuaManager : MonoBehaviour
         return GetLuaScript(name);
     }
 
-    private byte[] GetLuaScript(string name)
+    public byte[] GetLuaScript(string name)
     {
         name = name.Replace(".", "/");
         string fileName = PathUtil.GetLuaPath(name);
@@ -83,8 +83,8 @@ public class LuaManager : MonoBehaviour
             string fileName = PathUtil.GetStandardPath(luaFiles[i]);
             byte[] file = File.ReadAllBytes(fileName);
             AddLuaScript(PathUtil.GetUnityPath(fileName), file);
-            InitOver?.Invoke();
         }
+        InitOver?.Invoke();
     }
 #endif
 

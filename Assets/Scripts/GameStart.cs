@@ -12,7 +12,13 @@ public class GameStart : MonoBehaviour
         DontDestroyOnLoad(this);
 
         Manager.Resource.ParseVersionFile();
-        Manager.Lua.Init(() => Manager.Lua.StartLua("main"));
+        Manager.Lua.Init(() =>
+        {
+            Manager.Lua.StartLua("main");
+            //XLua.LuaFunction func = Manager.Lua.LuaEnv.Global.Get<XLua.LuaFunction>("Main");
+            //func.Call();
+            
+        });
         
     }
 }
