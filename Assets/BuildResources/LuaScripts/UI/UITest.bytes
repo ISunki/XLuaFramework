@@ -4,7 +4,65 @@ end
 
 function OnOpen()
 	print("lua OnOpen");
-	Manager.Scene:LoadScene("Test01", "Scene.Scene01");
+	-- Manager.Scene:LoadScene("Test01", "Scene.Scene01");
+	local btn_play_music = self.transform:Find("btn_play_music"):GetComponent("Button");
+	local btn_pause_music = self.transform:Find("btn_pause_music"):GetComponent("Button");
+	local btn_unpause_music = self.transform:Find("btn_unpause_music"):GetComponent("Button");
+	local btn_stop_music = self.transform:Find("btn_stop_music"):GetComponent("Button");
+	local btn_play_sound = self.transform:Find("btn_play_sound"):GetComponent("Button");
+	local btn_pooltest = self.transform:Find("btn_pooltest"):GetComponent("Button");
+	local btn_close = self.transform:Find("btn_close"):GetComponent("Button");
+	
+	local slider_music_volume = self.transform:Find("slider_music_volume"):GetComponent("Slider");
+	local slider_sound_volume = self.transform:Find("slider_sound_volume"):GetComponent("Slider");
+	
+	btn_play_music:OnClickSet(
+		function()
+			Manager.Sound:PlayMusic("miku.mp3");
+		end)
+		
+	btn_pooltest:OnClickSet(
+		function()
+			Manager.UI:OpenUI("UITest1", "UI", "UI.UITest");
+		end)
+
+	btn_close:OnClickSet(
+		function()
+			self:Close();
+		end)	
+
+	btn_pause_music:OnClickSet(
+		function()
+			Manager.Sound:PauseMusic();
+		end)		
+
+	btn_unpause_music:OnClickSet(
+		function()
+			Manager.Sound:UnPauseMusic();
+		end)	
+		
+	btn_stop_music:OnClickSet(
+		function()
+			Manager.Sound:StopMusic();
+		end)			
+			
+	btn_play_sound:OnClickSet(
+		function()
+			Manager.Sound:PlaySound("ui_touch.mp3");
+		end)	
+
+	slider_music_volume:OnValueChangedSet(
+		function(volume)
+			Manager.Sound:SetMusicVolume(volume);
+		end)
+
+	slider_sound_volume:OnValueChangedSet(
+		function(volume)
+			Manager.Sound:SetSoundVolume(volume);
+		end)
+	
+	slider_music_volume.value = 1;
+	slider_sound_volume.value = 1;		
 end
 
 function Update()
@@ -14,3 +72,4 @@ end
 function OnClose()
 	print("lua OnClose")
 end
+ 

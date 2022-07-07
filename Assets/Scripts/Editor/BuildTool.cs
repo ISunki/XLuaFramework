@@ -35,10 +35,10 @@ public class BuildTool : Editor
         string[] files = Directory.GetFiles(PathUtil.BuildResourcesPath, "*", SearchOption.AllDirectories);
         for (int i = 0; i < files.Length; i++)
         {
-            if (files[i].EndsWith(".meta"))
+            if (files[i].EndsWith(".meta") || files[i].EndsWith(".json"))
                 continue;
             AssetBundleBuild assetBundle = new AssetBundleBuild();
-            
+
             string fileName = PathUtil.GetStandardPath(files[i]);
             Debug.Log("file:" + fileName);
 

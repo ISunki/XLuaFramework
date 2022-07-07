@@ -27,6 +27,7 @@ function Main()
 	print("hello main!");
 	Manager.UI:OpenUI("UITest", "UI", "UI.UITest");
 	-- Manager.UI:OpenUI("UITest2", "Main", "UI.UITest");
+	-- Manager.Scene:LoadScene("Test01", "Scene.Scene01");
 end
 
-Main();
+-- Main();
