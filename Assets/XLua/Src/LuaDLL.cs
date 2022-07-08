@@ -12,7 +12,7 @@ namespace XLua.LuaDLL
     using System;
     using System.Runtime.InteropServices;
     using System.Text;
-    using XLua;
+    using XLua ;
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || XLUA_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -38,6 +38,14 @@ namespace XLua.LuaDLL
 #else
         const string LUADLL = "xlua";
 #endif
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_rapidjson(System.IntPtr L);
+
+        [MonoPInvokeCallback(typeof(LuaDLL.lua_CSFunction))]
+        public static int LoadRapidJson(System.IntPtr L)
+        {
+            return luaopen_rapidjson(L);
+        }
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_tothread(IntPtr L, int index);

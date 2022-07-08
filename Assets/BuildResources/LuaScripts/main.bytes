@@ -4,7 +4,8 @@ Vector3 = CS.UnityEngine.Vector3;
 Input = CS.UnityEngine.Input;
 KeyCode = CS.UnityEngine.KeyCode;
 Time = CS.UnityEngine.Time;
-
+Log = require("log")
+Json = require('rapidjson')
 
 local ui_group = 
 {	
@@ -24,8 +25,7 @@ Manager.UI:SetUIGroup(ui_group);
 Manager.Entity:SetEntityGroup(entity_group);
 
 function Main()
-	print("hello main!");
-	Manager.UI:OpenUI("UITest", "UI", "UI.UITest");
+	-- Manager.UI:OpenUI("UITest", "UI", "UI.UITest");
 	-- Manager.UI:OpenUI("UITest2", "Main", "UI.UITest");
 	-- Manager.Scene:LoadScene("Test01", "Scene.Scene01");
 end
